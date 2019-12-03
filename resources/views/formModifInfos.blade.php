@@ -4,6 +4,18 @@
 <div class="col-md-12 well well-md">
     <h2>Modification de mes informations personnelles</h2>
     <div class="form-horizontal">    
+
+        <div class="form-group">
+            <label class="col-md-3 control-label">adresse : </label>
+            <div class="col-md-6 col-md-3">
+                <input type="text" name="adresse" ng-model="adresse" class="form-control" placeholder="Votre adresse" maxlength="30" value="{{isset($errors) && count($errors) > 0 ? old('adresse'): $info->adresse}}" required>
+                @if($errors->has('adresse'))
+                <div class="alert alert-danger">
+                    {{ $errors->first('adresse') }}
+                </div>
+                @endif
+            </div>  
+        </div>  
         
         <div class="form-group">
             <label class="col-md-3 control-label">code postal : </label>
@@ -27,6 +39,28 @@
                 @endif
             </div>  
         </div>   
+        <div class="form-group">
+            <label class="col-md-3 control-label">tel : </label>
+            <div class="col-md-6 col-md-3">
+                <input type="text" name="tel" ng-model="tel" class="form-control" placeholder="Votre numero de telephone" maxlength="30" pattern="^(?:0|\(?\+33\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$" value="{{isset($errors) && count($errors) > 0 ? old('tel'): $info->tel}}" required>
+                @if($errors->has('tel'))
+                <div class="alert alert-danger">
+                    {{ $errors->first('tel') }}
+                </div>
+                @endif
+            </div>  
+        </div>   
+        <div class="form-group">
+            <label class="col-md-3 control-label">email : </label>
+            <div class="col-md-6 col-md-3">
+                <input type="email" name="email" ng-model="email" class="form-control" placeholder="Votre email" maxlength="30" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" value="{{isset($errors) && count($errors) > 0 ? old('email'): $info->email}}" required>
+                @if($errors->has('email'))
+                <div class="alert alert-danger">
+                    {{ $errors->first('email') }}
+                </div>
+                @endif
+            </div>  
+        </div>    
         <div class="form-group">
             <div class="col-md-6 col-md-offset-3">
                 <button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-log-in"></span> Valider</button>

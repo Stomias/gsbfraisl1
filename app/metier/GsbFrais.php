@@ -259,7 +259,7 @@ public function getInfosVisiteur($login, $mdp){
 */
 
 	public function getInfosPerso($id){
-		$req = "select cp, ville from visiteur where visiteur.id=:id";
+		$req = "select cp, ville, adresse, email, tel  from visiteur where visiteur.id=:id";
 		$ligne = DB::select($req, ['id'=>$id]);
 		return $ligne[0];
 	}
@@ -270,10 +270,10 @@ public function getInfosVisiteur($login, $mdp){
  * @param $ville
  * @param $idVisiteur 
  */
-	public function modifInfos($codePostal, $ville, $idVisiteur){
-		$req = "update visiteur set cp = :codePostal, ville = :ville 
+	public function modifInfos($codePostal, $ville, $idVisiteur, $adresse, $email, $tel){
+		$req = "update visiteur set cp = :codePostal, ville = :ville, adresse = :adresse, email = :email, tel = :tel
 		where id = :idVisiteur";
-		DB::update($req, ['codePostal'=>$codePostal, 'idVisiteur'=>$idVisiteur, 'ville'=>$ville]);
+		DB::update($req, ['codePostal'=>$codePostal, 'idVisiteur'=>$idVisiteur, 'ville'=>$ville, 'adresse'=>$adresse, 'email'=>$email, 'tel'=>$tel]);
 	}
 }
 ?>

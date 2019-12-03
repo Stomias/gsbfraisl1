@@ -26,7 +26,10 @@ class modifInfosController extends Controller
             // bail fait en sorte que des qu'il y a une erreur, on arrete la verification
             // required obligatoire
             // digits:x = x chiffre
-            'ville' => 'bail|required|between:2,30|alpha'
+            'ville' => 'bail|required|between:2,30|alpha',
+            'adresse' => 'bail|required|between:2,30|',
+            'email' => 'bail|required|between:2,30|',
+            'tel' => 'bail|required|',
             // between pour la taille
             // alpha pour alphanumeric
         ]);
@@ -34,11 +37,13 @@ class modifInfosController extends Controller
         $adresse = $request->input('adresse');
         $cp = $request->input('cp');
         $ville = $request->input('ville');
+        $email = $request->input('email');
+        $tel = $request->input('tel');
         $idVisiteur = Session::get('id');
         // To do : Modifier la BDD
 
         $gsbFrais = new GsbFrais();
-        $info = $gsbFrais->modifInfos($cp, $ville, $idVisiteur);
+        $info = $gsbFrais->modifInfos($cp, $ville, $idVisiteur, $adresse, $email, $tel);
 
         //Confirmer la MAJ
         return view('confirmModifInfos');
