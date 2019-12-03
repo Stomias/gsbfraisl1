@@ -15,7 +15,8 @@ class GsbFrais{
  * @return l'id, le nom et le prénom sous la forme d'un objet 
 */
 public function getInfosVisiteur($login, $mdp){
-        $req = "select visiteur.id as id, visiteur.nom as nom, visiteur.prenom as prenom from visiteur 
+		$req = "SELECT visiteur.id as id, visiteur.nom as nom, visiteur.prenom as prenom, travailler.tra_role as tra_role from visiteur
+		inner join travailler on visiteur.id = travailler.idVisiteur
         where visiteur.login=:login and visiteur.mdp=:mdp";
         $ligne = DB::select($req, ['login'=>$login, 'mdp'=>$mdp]);
         return $ligne;
