@@ -64,3 +64,10 @@ Route::get('/modifInfos', 'modifInfosController@affFormModifInfos');
 
 //VerifInfo
 Route::post('/modifInfos', 'modifInfosController@verifInfos');
+
+
+//ajoutUser
+Route::get('/ajoutUser', 'ajoutUserController@affFormAjoutUser');
+
+//ajoutUser
+Route::post('/ajoutUser', 'ajoutUserController@verifInfos');
