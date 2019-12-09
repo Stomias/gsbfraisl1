@@ -18,7 +18,7 @@ public function getInfosVisiteur($login, $mdp){
 		$req = "SELECT visiteur.id as id, visiteur.nom as nom, visiteur.prenom as prenom, travailler.tra_role as tra_role from visiteur
 		inner join travailler on visiteur.id = travailler.idVisiteur
         where visiteur.login=:login and visiteur.mdp=:mdp order by tra_date DESC";
-        $ligne = DB::select($req, ['login'=>$login, 'mdp'=>$mdp]);
+        $ligne = DB::select($req, ['login'=>$login, 'mdp'=>sha1($mdp)]);
         return $ligne;
 }
 /**
@@ -276,5 +276,26 @@ public function getInfosVisiteur($login, $mdp){
 		where id = :idVisiteur";
 		DB::update($req, ['codePostal'=>$codePostal, 'idVisiteur'=>$idVisiteur, 'ville'=>$ville, 'adresse'=>$adresse, 'email'=>$email, 'tel'=>$tel]);
 	}
+
+	/**
+	 * Retourne sous forme d'un tableau associatif toutes les lignes de frais au forfait
+	 * concernées par les deux arguments
+	 
+	* @param $secteur
+	* @return 
+	*/
+	public function getListeVisiteurDelegue($id){
+		$req = "select * from vaffectation where aff_sec = (select aff_sec from vaffectation where idVisiteur:id)";
+		$lesLignes = DB::select($req, ['id'=>$id]);
+		return $lesLignes; 
+	}
+
+	// public function getLesFrais($idVisiteur, $mois){
+	// 	$req = "select * from  fichefrais where idvisiteur = :idVisiteur
+    //             and  mois >= :mois   
+	// 	order by fichefrais.mois desc ";
+    //             $lesLignes = DB::select($req, ['idVisiteur'=>$idVisiteur, 'mois'=>$mois]);
+    //             return $lesLignes;
+	// }
 }
 ?>

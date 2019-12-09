@@ -64,3 +64,6 @@ Route::get('/modifInfos', 'modifInfosController@affFormModifInfos');
 
 //VerifInfo
 Route::post('/modifInfos', 'modifInfosController@verifInfos');
+
+// Retourner à la liste des visiteurs et des delegues
+Route::get('/getListeVisiteurDelegue', 'voirListeVisiteurDelegueController@getListeVisiteurDelegue');
