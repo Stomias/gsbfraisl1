@@ -68,6 +68,9 @@ Route::post('/modifInfos', 'modifInfosController@verifInfos');
 // Retourner à la liste des visiteurs et des delegues
 Route::get('/getListeVisiteurDelegue', 'voirListeVisiteurDelegueController@getListeVisiteurDelegue');
 
+// ModifDetailsVisiteur
+Route::get('/voirDetailVisiteurDelegue/{id}', 'modifUtilisateurController@voirDetailUtilisateur');
+
 //ajoutUser
 Route::get('/ajoutUser', 'ajoutUserController@affFormAjoutUser');
 

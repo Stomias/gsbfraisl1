@@ -17,7 +17,7 @@ class modifInfosController extends Controller
         $idVisiteur = Session::get('id');
         $gsbFrais = new GsbFrais();
         $info = $gsbFrais->getInfosPerso($idVisiteur);
-        return view('formModifInfos', compact('info', 'erreur'));
+        return view('formModifInfos', compact('info', 'error'));
     }
 
     public function verifInfos(Request $request){
