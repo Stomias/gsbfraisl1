@@ -15,7 +15,7 @@ class GsbFrais{
  * @return l'id, le nom et le prénom sous la forme d'un objet 
 */
 public function getInfosVisiteur($login, $mdp){
-		$req = "SELECT visiteur.id as id, visiteur.nom as nom, visiteur.prenom as prenom, travailler.tra_role as tra_role, region.reg_nom as reg_nom, secteur.sec_nom as sec_nom from visiteur
+		$req = "SELECT visiteur.id as id, visiteur.nom as nom, visiteur.prenom as prenom, travailler.tra_role as tra_role, region.reg_nom as reg_nom, secteur.sec_nom as sec_nom  from visiteur
 		inner join travailler on visiteur.id = travailler.idVisiteur
 		inner join region on travailler.tra_reg = region.id
 		inner join secteur on region.sec_code = secteur.id
@@ -272,12 +272,37 @@ public function getInfosVisiteur($login, $mdp){
  * @param $codePostal
  * @param $ville
  * @param $idVisiteur 
+ * @param $adresse
+ * @param $email
+ * @param $tel
  */
 	public function modifInfos($codePostal, $ville, $idVisiteur, $adresse, $email, $tel){
 		$req = "update visiteur set cp = :codePostal, ville = :ville, adresse = :adresse, email = :email, tel = :tel
 		where id = :idVisiteur";
 		DB::update($req, ['codePostal'=>$codePostal, 'idVisiteur'=>$idVisiteur, 'ville'=>$ville, 'adresse'=>$adresse, 'email'=>$email, 'tel'=>$tel]);
 	}
+
+	/**
+	 * Ajoute un utilisateur dans la base de données
+	 * @param $idVisiteur
+	 * @param $nom
+	 * @param $prénom
+	 * @param $cp
+	 * @param $ville
+	 * @param $adresse
+	 * @param $email
+	 * @param $tel
+	 * @param $embauche
+	 * @param $password	 
+	 * */
+
+	public function ajoutInfos($idVisiteur, $nom, $prénom, $cp, $ville, $adresse, $email, $tel, $embauche, $password){
+		DB::insert('insert into visiteur (id,nom,prenom,login,mdp,adresse,cp,ville,dateEmbauche,email,tel) values (?,?,?,?,?,?,?,?,?,?,?)', [$idVisiteur,$nom,$prénom,strtolower($prénom[0] .$nom),sha1($password),$adresse,$cp,$ville,$embauche,$email,$tel]);
+
+		
+	}
+
+
 
 	/**
 	 * Retourne sous forme d'un tableau associatif toutes les lignes de frais au forfait

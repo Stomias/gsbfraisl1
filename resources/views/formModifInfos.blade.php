@@ -6,7 +6,7 @@
     <div class="form-horizontal">    
 
         <div class="form-group">
-            <label class="col-md-3 control-label">adresse : </label>
+            <label class="col-md-3 control-label">Adresse : </label>
             <div class="col-md-6 col-md-3">
                 <input type="text" name="adresse" ng-model="adresse" class="form-control" placeholder="Votre adresse" maxlength="30" value="{{isset($errors) && count($errors) > 0 ? old('adresse'): $info->adresse}}" required>
                 @if($errors->has('adresse'))
@@ -18,7 +18,7 @@
         </div>  
         
         <div class="form-group">
-            <label class="col-md-3 control-label">code postal : </label>
+            <label class="col-md-3 control-label">Code postal : </label>
             <div class="col-md-6 col-md-3">
                  <input type="text" name="cp" ng-model="cp" class="form-control" placeholder="Votre code postal" size ="5"  value="{{ isset($errors) && count($errors) > 0 ? old('cp'): $info->cp }}" required> 
                  @if($errors->has('cp'))
@@ -29,7 +29,7 @@
                  </div> 
         </div>
         <div class="form-group">
-            <label class="col-md-3 control-label">ville : </label>
+            <label class="col-md-3 control-label">Ville : </label>
             <div class="col-md-6 col-md-3">
                 <input type="text" name="ville" ng-model="ville" class="form-control" placeholder="Votre ville" maxlength="30" pattern ="^[a-zéèàêâùïüëA-Z][a-zéèàêâùïüëA-Z-'\s]{1,29}$" value="{{isset($errors) && count($errors) > 0 ? old('ville'): $info->ville}}" required>
                 @if($errors->has('ville'))
@@ -40,7 +40,7 @@
             </div>  
         </div>   
         <div class="form-group">
-            <label class="col-md-3 control-label">tel : </label>
+            <label class="col-md-3 control-label">Tel : </label>
             <div class="col-md-6 col-md-3">
                 <input type="text" name="tel" ng-model="tel" class="form-control" placeholder="Votre numero de telephone" maxlength="30" pattern="^(?:0|\(?\+33\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$" value="{{isset($errors) && count($errors) > 0 ? old('tel'): $info->tel}}" required>
                 @if($errors->has('tel'))
@@ -51,7 +51,7 @@
             </div>  
         </div>   
         <div class="form-group">
-            <label class="col-md-3 control-label">email : </label>
+            <label class="col-md-3 control-label">Email : </label>
             <div class="col-md-6 col-md-3">
                 <input type="email" name="email" ng-model="email" class="form-control" placeholder="Votre email" maxlength="30" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" value="{{isset($errors) && count($errors) > 0 ? old('email'): $info->email}}" required>
                 @if($errors->has('email'))

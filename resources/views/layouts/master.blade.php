@@ -47,7 +47,9 @@
                             @if (Session::get('role') == 'Responsable')
                             <li><a href="{{ url('/getListeVisiteurDelegue') }}" data-toggle="collapse" data-target=".navbar-collapse.in">Gerer Visiteur et délégué</a></li> 
                             @endif
+                            @if (Session::get('role') == 'Responsable')
                             <li><a href="{{ url('/ajoutUser') }}" data-toggle="collapse" data-target=".navbar-collapse.in">Ajouter utilisateur</a></li>
+                            @endif
                         </ul>  
                         <ul class="nav navbar-nav navbar-right">                             
                             <li><a href="{{ url('/Logout') }}" data-toggle="collapse" data-target=".navbar-collapse.in">Se déconnecter</a></li>
