@@ -23,6 +23,12 @@ public function getInfosVisiteur($login, $mdp){
         $ligne = DB::select($req, ['login'=>$login, 'mdp'=>sha1($mdp)]);
         return $ligne;
 }
+
+public function modifMdp($mdp, $idVisiteur) {
+	$req = "update visiteur set mdp = :mdp 
+		where visiteur.id = :idVisiteur";
+		DB::update($req, ['mdp'=>sha1($mdp), 'idVisiteur'=>$idVisiteur]);	
+}
 /**
  * Retourne sous forme d'un tableau d'objets toutes les lignes de frais hors forfait
  * concernées par les deux arguments
@@ -262,7 +268,7 @@ public function getInfosVisiteur($login, $mdp){
 */
 
 	public function getInfosPerso($id){
-		$req = "select cp, ville, adresse, email, tel  from visiteur where visiteur.id=:id";
+		$req = "select * from visiteur where visiteur.id=:id";
 		$ligne = DB::select($req, ['id'=>$id]);
 		return $ligne[0];
 	}
@@ -308,21 +314,41 @@ public function getInfosVisiteur($login, $mdp){
 	 * Retourne sous forme d'un tableau associatif toutes les lignes de frais au forfait
 	 * concernées par les deux arguments
 	 
-	* @param $secteur
+	* @param $id
 	* @return 
 	*/
 	public function getListeVisiteurDelegue($id){
-		$req = "select * from vaffectation where aff_sec = (select aff_sec from vaffectation where idVisiteur:id)";
+		$req = "select * from vaffectation inner join visiteur on vaffectation.idVisiteur = visiteur.id where aff_sec = (select aff_sec from vaffectation where idVisiteur= :id)";
 		$lesLignes = DB::select($req, ['id'=>$id]);
 		return $lesLignes; 
 	}
 
-	// public function getLesFrais($idVisiteur, $mois){
-	// 	$req = "select * from  fichefrais where idvisiteur = :idVisiteur
-    //             and  mois >= :mois   
-	// 	order by fichefrais.mois desc ";
-    //             $lesLignes = DB::select($req, ['idVisiteur'=>$idVisiteur, 'mois'=>$mois]);
-    //             return $lesLignes;
-	// }
+	/**
+	 * Retourne les informations d'un visiteur 
+	 
+	* @param $id
+	* @return l'id, le nom, le prénom, le role et le secteur sous la forme d'un objet 
+	*/
+	public function getInfosVisiteurID($id){
+		$req = "SELECT visiteur.id as id, visiteur.nom as nom, visiteur.prenom as prenom, travailler.tra_role as tra_role, region.reg_nom as reg_nom, secteur.sec_nom as sec_nom from visiteur
+		inner join travailler on visiteur.id = travailler.idVisiteur
+		inner join region on travailler.tra_reg = region.id
+		inner join secteur on region.sec_code = secteur.id
+		where visiteur.id=:id order by tra_date DESC";
+		$ligne = DB::select($req, ['id'=>$id]);
+		return $ligne[0];
+	}
+
+	/**
+	 * Retourne les regions du même secteur que l'argument
+	 
+	* @param $id
+	* @return le nom de la region sous la forme d'un objet 
+	*/
+	public function getRegionSecteurVisiteurID($id){
+		$req = "select id,reg_nom from region where sec_code = (select aff_sec from vaffectation where idVisiteur = 'a131')";
+		$ligne = DB::select($req, ['id'=>$id]);
+		return $ligne;
+	}
 }
 ?>
