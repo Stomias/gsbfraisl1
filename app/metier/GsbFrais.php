@@ -23,6 +23,12 @@ public function getInfosVisiteur($login, $mdp){
         $ligne = DB::select($req, ['login'=>$login, 'mdp'=>sha1($mdp)]);
         return $ligne;
 }
+
+public function modifMdp($mdp, $idVisiteur) {
+	$req = "update visiteur set mdp = :mdp 
+		where visiteur.id = :idVisiteur";
+		DB::update($req, ['mdp'=>sha1($mdp), 'idVisiteur'=>$idVisiteur]);	
+}
 /**
  * Retourne sous forme d'un tableau d'objets toutes les lignes de frais hors forfait
  * concernées par les deux arguments
@@ -262,7 +268,7 @@ public function getInfosVisiteur($login, $mdp){
 */
 
 	public function getInfosPerso($id){
-		$req = "select cp, ville, adresse, email, tel  from visiteur where visiteur.id=:id";
+		$req = "select * from visiteur where visiteur.id=:id";
 		$ligne = DB::select($req, ['id'=>$id]);
 		return $ligne[0];
 	}

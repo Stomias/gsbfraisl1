@@ -61,8 +61,7 @@ Route::get('getRetour/{retour}', function($retour){
 
 //modifInfo
 Route::get('/modifInfos', 'modifInfosController@affFormModifInfos');
-
-//VerifInfo
+//modifInfo
 Route::post('/modifInfos', 'modifInfosController@verifInfos');
 
 // Retourner à la liste des visiteurs et des delegues
@@ -70,6 +69,10 @@ Route::get('/getListeVisiteurDelegue', 'voirListeVisiteurDelegueController@getLi
 
 //ajoutUser
 Route::get('/ajoutUser', 'ajoutUserController@affFormAjoutUser');
-
 //ajoutUser
 Route::post('/ajoutUser', 'ajoutUserController@verifInfos');
+
+//changeMdp
+Route::get('/changeMdp', 'changePasswordController@affFormModifMdp');
+//changeMdp
+Route::post('/changeMdp', 'changePasswordController@verifInfos');

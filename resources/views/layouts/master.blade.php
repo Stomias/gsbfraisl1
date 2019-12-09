@@ -48,6 +48,7 @@
                             <li><a href="{{ url('/getListeVisiteurDelegue') }}" data-toggle="collapse" data-target=".navbar-collapse.in">Gerer Visiteur et délégué</a></li> 
                             @endif
                             <li><a href="{{ url('/ajoutUser') }}" data-toggle="collapse" data-target=".navbar-collapse.in">Ajouter utilisateur</a></li>
+                            <li><a href="{{ url('/changeMdp') }}" data-toggle="collapse" data-target=".navbar-collapse.in">Changer Mdp</a></li>
                         </ul>  
                         <ul class="nav navbar-nav navbar-right">                             
                             <li><a href="{{ url('/Logout') }}" data-toggle="collapse" data-target=".navbar-collapse.in">Se déconnecter</a></li>
