@@ -15,10 +15,12 @@ class GsbFrais{
  * @return l'id, le nom et le prénom sous la forme d'un objet 
 */
 public function getInfosVisiteur($login, $mdp){
-		$req = "SELECT visiteur.id as id, visiteur.nom as nom, visiteur.prenom as prenom, travailler.tra_role as tra_role from visiteur
+		$req = "SELECT visiteur.id as id, visiteur.nom as nom, visiteur.prenom as prenom, travailler.tra_role as tra_role, region.reg_nom as reg_nom, secteur.sec_nom as sec_nom from visiteur
 		inner join travailler on visiteur.id = travailler.idVisiteur
+		inner join region on travailler.tra_reg = region.id
+		inner join secteur on region.sec_code = secteur.id
         where visiteur.login=:login and visiteur.mdp=:mdp order by tra_date DESC";
-        $ligne = DB::select($req, ['login'=>$login, 'mdp'=>$mdp]);
+        $ligne = DB::select($req, ['login'=>$login, 'mdp'=>sha1($mdp)]);
         return $ligne;
 }
 /**
