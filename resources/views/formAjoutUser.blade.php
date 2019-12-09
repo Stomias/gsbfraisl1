@@ -147,7 +147,7 @@
                             <option value="" disabled selected>Choisir un lieu  </option>
 
                             @foreach ($regions as $region)
-                                <option value='{{$region->aff_reg}}'>{{$region->aff_reg}} </option>
+                                <option value='{{$region->id}}'>{{$region->id}} </option>
                             @endforeach
                 
                     </select>
