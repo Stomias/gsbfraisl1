@@ -43,11 +43,11 @@
                         <ul class="nav navbar-nav"> 
                             <li><a href="{{ url('/saisirFraisForfait') }}" data-toggle="collapse" data-target=".navbar-collapse.in">Saisir Frais</a></li>
                             <li><a href="{{ url('/getListeFrais') }}" data-toggle="collapse" data-target=".navbar-collapse.in">Voir Frais</a></li>
-                            <li><a href="{{ url('/modifMdp') }}" data-toggle="collapse" data-target=".navbar-collapse.in">Modifier mdp</a></li>
                             <li><a href="{{ url('/modifInfos') }}" data-toggle="collapse" data-target=".navbar-collapse.in">Modifier infos</a></li>
                             @if (Session::get('role') == 'Responsable')
                             <li><a href="{{ url('/getListeVisiteurDelegue') }}" data-toggle="collapse" data-target=".navbar-collapse.in">Gerer Visiteur et délégué</a></li> 
                             @endif
+                            <li><a href="{{ url('/ajoutUser') }}" data-toggle="collapse" data-target=".navbar-collapse.in">Ajouter utilisateur</a></li>
                         </ul>  
                         <ul class="nav navbar-nav navbar-right">                             
                             <li><a href="{{ url('/Logout') }}" data-toggle="collapse" data-target=".navbar-collapse.in">Se déconnecter</a></li>
