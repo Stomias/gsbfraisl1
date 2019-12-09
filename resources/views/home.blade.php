@@ -12,20 +12,21 @@
     @section('content')
         <div>
             <h2 class="bvn">Bienvenue {{Session::get('nom')}} {{Session::get('prenom')}}</h2>
+            <h4>Vous êtes affecté à la region <b>{{Session::get('region')}}</b> dans le secteur <b>{{Session::get('secteur')}}</b></h4> <br>
             <h3 class="bvn">Vous êtes bien connecté en tant que {{Session::get('role')}}</h3><br>
             @if (Session::get('role') == "Visiteur")
-                <h4>
+                <p>
                     L'objectif d'une visite est d'actualiser et rafraîchir vos connaissances sur les produits de l'entreprise. Les visiteurs ne font pas de vente, mais leurs interventions ont un impact certain sur la prescription de la pharmacopée du laboratoire
-                </h4>
+                </p>
             @elseif(Session::get('role') == "Délégué")
-                <h4>
+                <p>
                     Un délegué regional occupent trois quarts de son temps professionnel à la visite médicale.
                     Il a un rôle d'intermédiaire entre les visiteurs d'une région et leur responsable de secteur
-                </h4>
+                </h5>
             @elseif(Session::get('role') == "Responsable")
-                <h4>
+                <p>
                     Les responsables de secteur ont la charge d'encadrer la formation des nouveaux visiteurs, de dynamiser leurs équipes.Ils définissent les objectifs de vente (indirectement), gèrent les approvisionnements en échantillons et distribuent les budgets de fonctionnement par région. 
-                </h4>
+                </p>
             @endif
         </div>
     @stop
