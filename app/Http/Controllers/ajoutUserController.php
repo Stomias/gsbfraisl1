@@ -72,10 +72,10 @@ class ajoutUserController extends Controller
             $info = $gsbFrais->ajoutInfos($idVisiteur, $nom, $prénom, $cp, $ville, $adresse, $email, $tel, $embauche,$password);
             $travail = $gsbFrais->ajoutTravail($idVisiteur, $role, $reg);
             //Confirmer l'ajout
-            return view('confirmAjoutUser', compact('info', 'error'));
+            return view('confirmAjoutUser');
         }
         else{
-            return view('RejetUser', compact('info', 'error'));
+            return view('RejetUser');
         }
         
         
