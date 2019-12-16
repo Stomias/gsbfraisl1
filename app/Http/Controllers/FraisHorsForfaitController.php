@@ -21,7 +21,7 @@ class FraisHorsForfaitController extends Controller
         $unFrais = new GsbFrais();
         $mesFraisHorsForfait = $unFrais->getLesFraisHorsForfait($idVisiteur, $mois);
         $titreVue = "Liste des frais hors forfait de la fiche " . $mois;
-         // On affiche la liste des Frais Hors Forfait       
+         // On affiche la liste des Frais Hors Forfait
         $montantTotal = 0;
         foreach ($mesFraisHorsForfait as $fhf){
             $montantTotal = $montantTotal + $fhf->montant;

@@ -10,6 +10,7 @@ use App\metier\GsbFrais;
 class changePasswordController extends Controller
 {
     /**
+     * Affiche le formulaire de modification de mot de passe
      * @return vue formModifMdp
      */
     public function affFormModifMdp(){
@@ -17,6 +18,8 @@ class changePasswordController extends Controller
     }
 
     /**
+     * @param $request
+     * Vérifie l'intégration des données et change le mot de passe
      * @return vue formModifMdp
      */
     public function verifInfos(Request $request){
@@ -28,8 +31,6 @@ class changePasswordController extends Controller
         $gsbFrais = new GsbFrais();
         $idVisiteur = Session::get('id');
         $info = $gsbFrais->getInfosPerso($idVisiteur);
-
-        // $validator = new Validator();
 
         $ancienMdp = $request->input('ancienMdp');
         $newMdp = $request->input('newMdp');

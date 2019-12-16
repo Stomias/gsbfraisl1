@@ -9,7 +9,7 @@ use App\metier\GsbFrais;
 class modifInfosController extends Controller
 {
     /**
-     * Initialise le formulaireavec les infos personnelles
+     * Initialise le formulaire avec les infos personnelles
      * @return vue formModifInfos
      */
     public function affFormModifInfos(){
@@ -20,6 +20,10 @@ class modifInfosController extends Controller
         return view('formModifInfos', compact('info', 'error'));
     }
 
+    /**
+     * @param $request
+     * Vérifie l'intégrité des informations et modification
+     */
     public function verifInfos(Request $request){
         $this->validate($request, [
             'cp' => 'bail|required|digits:5',

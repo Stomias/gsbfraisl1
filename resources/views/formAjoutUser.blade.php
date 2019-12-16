@@ -49,7 +49,7 @@
                 </div>
                 @endif
             </div>  
-            <label class="col-md-3 control-label" style="color:red">*ne peut être modifier</label>
+            <label class="col-md-3 control-label" style="color:red">*ne peut être modifié</label>
         </div>
         
         <div class="form-group">

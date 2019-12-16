@@ -9,8 +9,9 @@ use App\metier\GsbFrais;
 class ajoutUserController extends Controller
 {
     /**
-     * Initialise le formulaireavec les infos personnelles
-     * @return vue formModifInfos
+     * Initialise le formulaire si l'utilisateur est Responsable
+     * @return vue formAjoutUser
+     * @return vue home
      */
     public function affFormAjoutUser(){
         $error = "";
@@ -29,6 +30,12 @@ class ajoutUserController extends Controller
         }
     }
 
+    /**
+     * @param $request
+     * Initialise le formulaire si l'utilisateur est Responsable sinon : home
+     * @return vue formAjoutUser
+     * @return vue home
+     */
     public function verifInfos(Request $request){
         $this->validate($request, [
             'id' => 'bail|required|between:2,4',

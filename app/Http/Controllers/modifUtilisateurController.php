@@ -9,6 +9,12 @@ use App\metier\GsbFrais;
 
 class modifUtilisateurController extends Controller
 {
+    /**
+     * @param $id
+     * Initialise un formulaire avec les détails d'un utilisateur
+     * @return vue formModifVisiteurDelegue
+     * @return vue home
+     */
     public function voirDetailUtilisateur($id){
         $error= "";
         $gsbFrais = new GsbFrais();
@@ -23,6 +29,11 @@ class modifUtilisateurController extends Controller
         }
     }
 
+    /**
+     * @param $request, $id
+     * Permet de modifier les infos d'un utilisateur
+     * @return vue confirmModifInfosUtilisateur
+     */
     public function modifInfosUtilisateur(Request $request, $id){
         $this->validate($request, [
             'id' => 'bail|required',
