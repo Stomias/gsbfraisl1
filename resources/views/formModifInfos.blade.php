@@ -4,7 +4,7 @@
 <div class="col-md-12 well well-md">
     <h2>Modification de mes informations personnelles</h2>
     <div class="form-horizontal">    
-
+        <i>Vous pouvez modifier vos informations personnelles ici</i><br><br> 
         <div class="form-group">
             <label class="col-md-3 control-label">Adresse : </label>
             <div class="col-md-6 col-md-3">

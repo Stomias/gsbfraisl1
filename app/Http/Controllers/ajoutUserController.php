@@ -19,8 +19,10 @@ class ajoutUserController extends Controller
         $gsbFrais = new GsbFrais();
         $info = $gsbFrais->getInfosPerso($idVisiteur);
         $regions = $gsbFrais->getRegionSecteurVisiteurID($idVisiteur);
+        Session::put('mdp', $gsbFrais->Genere_Password(6));
+        $mdp = Session::get('mdp');
         if (Session::get('role') == 'Responsable'){
-            return view('formAjoutUser', compact('info','regions', 'error'));
+            return view('formAjoutUser', compact('info','regions', 'mdp', 'error'));
         }
         else{
             return view('home', compact('info', 'erreur'));
@@ -33,7 +35,6 @@ class ajoutUserController extends Controller
             'nom' => 'bail|required|between:3,30|alpha',
             'prenom' => 'bail|required|between:3,30|alpha',
             'password' => 'required|between:5,8',
-            'passwordconf'=> 'required|between:5,8',
             // bail fait en sorte que des qu'il y a une erreur, on arrete la verification
             // required obligatoire
             // digits:x = x chiffre
@@ -59,23 +60,24 @@ class ajoutUserController extends Controller
         $tel = $request->input('tel');
         $embauche = $request->input('embauche');
         $password = $request->input('password');
-        $password2 = $request->input('passwordconf');
         $role =$request->input('role');
-        $role =$request->input('reg');
+        $reg =$request->input('reg');
+        Session::put('login', strtolower($prénom[0] .$nom));
         
         // To do : Modifier la BDD
-        if($password == $password2){
-            $gsbFrais = new GsbFrais();
+        $gsbFrais = new GsbFrais();
+        $verif = $gsbFrais->UserDispo($idVisiteur);
+        if($verif == null){
+            
             $info = $gsbFrais->ajoutInfos($idVisiteur, $nom, $prénom, $cp, $ville, $adresse, $email, $tel, $embauche,$password);
             $travail = $gsbFrais->ajoutTravail($idVisiteur, $role, $reg);
-            //Confirmer la MAJ
-            return view('confirmAjoutUser');
+            //Confirmer l'ajout
+            return view('confirmAjoutUser', compact('info', 'error'));
         }
         else{
-            echo "<script>alert(\"Les mots de passe ne sont pas identiques\")</script>";
-            return view('formAjoutUser');
-
+            return view('RejetUser', compact('info', 'error'));
         }
+        
         
     }
 }

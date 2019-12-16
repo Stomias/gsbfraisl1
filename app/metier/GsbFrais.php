@@ -288,6 +288,19 @@ public function modifMdp($mdp, $idVisiteur) {
 		DB::update($req, ['codePostal'=>$codePostal, 'idVisiteur'=>$idVisiteur, 'ville'=>$ville, 'adresse'=>$adresse, 'email'=>$email, 'tel'=>$tel]);
 	}
 
+	function Genere_Password($size)
+	{
+		// Initialisation des caractères utilisables
+		$characters = array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z");
+		$password="";
+		for($i=0;$i<$size;$i++)
+		{
+			$password .= ($i%2) ? strtoupper($characters[array_rand($characters)]) : $characters[array_rand($characters)];
+		}
+			
+		return $password;
+	}
+
 	/**
 	 * Ajoute un utilisateur dans la base de données
 	 * @param $idVisiteur
@@ -303,9 +316,20 @@ public function modifMdp($mdp, $idVisiteur) {
 	 * */
 
 	public function ajoutInfos($idVisiteur, $nom, $prénom, $cp, $ville, $adresse, $email, $tel, $embauche, $password){
-		DB::insert('insert into visiteur (id,nom,prenom,login,mdp,adresse,cp,ville,dateEmbauche,email,tel) values (?,?,?,?,?,?,?,?,?,?,?)', [$idVisiteur,$nom,$prénom,strtolower($prénom[0] .$nom),sha1($password),$adresse,$cp,$ville,$embauche,$email,$tel]);
-
 		
+		DB::insert('insert into visiteur (id,nom,prenom,login,mdp,adresse,cp,ville,dateEmbauche,email,tel) values (?,?,?,?,?,?,?,?,?,?,?)', [$idVisiteur,$nom,$prénom,strtolower($prénom[0] .$nom),sha1($password),$adresse,$cp,$ville,$embauche,$email,$tel]);
+		
+	}
+
+	/**
+	 * Ajoute un utilisateur dans la base de données
+	 * @param $idVisiteur
+	 * @param $role
+	 * @param $reg
+	 * */
+
+	public function ajoutTravail($idVisiteur, $role, $reg){
+		DB::insert('insert into travailler (idVisiteur,tra_date,tra_reg,tra_role) values (?,?,?,?)',[$idVisiteur,date("Y-m-d"),$reg,$role]);
 	}
 
 
@@ -346,7 +370,13 @@ public function modifMdp($mdp, $idVisiteur) {
 	* @return le nom de la region sous la forme d'un objet 
 	*/
 	public function getRegionSecteurVisiteurID($id){
-		$req = "select id,reg_nom from region where sec_code = (select aff_sec from vaffectation where idVisiteur = 'a131')";
+		$req = "select id,reg_nom from region where sec_code = (select aff_sec from vaffectation where idVisiteur = :id)";
+		$ligne = DB::select($req, ['id'=>$id]);
+		return $ligne;
+	}
+
+	public function UserDispo($id){
+		$req = "select id from visiteur where id = :id";
 		$ligne = DB::select($req, ['id'=>$id]);
 		return $ligne;
 	}
