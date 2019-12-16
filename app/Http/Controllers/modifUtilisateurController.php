@@ -15,7 +15,12 @@ class modifUtilisateurController extends Controller
         $detailsVisiteur = $gsbFrais->getInfosVisiteurID($id);
         $regions = $gsbFrais->getRegionSecteurVisiteurID($id);
         $retour = "/getListeVisiteurDelegue";
-        return view('formModifVisiteurDelegue', compact('detailsVisiteur','regions','retour','error'));
+        if (Session::get('role') == 'Responsable'){
+            return view('formModifVisiteurDelegue', compact('detailsVisiteur','regions','retour','error'));
+        }
+        else{
+            return view('home');
+        }
     }
 
     public function modifInfosUtilisateur(Request $request, $id){

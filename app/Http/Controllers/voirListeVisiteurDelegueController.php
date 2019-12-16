@@ -18,6 +18,11 @@ class VoirListeVisiteurDelegueController extends Controller
         $idVisiteur = Session::get('id');
         $mesVisiteurDelegue = $gsbFrais->getListeVisiteurDelegue($idVisiteur);
         $titreVue= "Liste des visiteurs et délégué de mon secteur";
-        return view('listeVisiteurDelegue', compact('mesVisiteurDelegue', 'titreVue'));
+        if (Session::get('role') == 'Responsable'){
+            return view('listeVisiteurDelegue', compact('mesVisiteurDelegue', 'titreVue'));
+        }
+        else{
+            return view('home');
+        }
     }
 }
