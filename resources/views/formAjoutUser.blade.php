@@ -3,7 +3,8 @@
 {!! Form::open(['url' => 'ajoutUser']) !!}  
 <div class="col-md-12 well well-md">
     <h2>Ajouter un utilisateur</h2>
-    <div class="form-horizontal">    
+    <div class="form-horizontal">   
+        <i>Pour ajouter un nouvel utilisateur, veuillez remplir tous les champs ci-dessous</i><br><br> 
         <div class="form-group">
             <label class="col-md-3 control-label">Id : </label>
             <div class="col-md-6 col-md-3">
@@ -40,26 +41,15 @@
         <div class="form-group">
             <label class="col-md-3 control-label">Mot de passe : </label>
             <div class="col-md-6 col-md-3">
-                <input type="password" name="password" ng-model="password" class="form-control" placeholder="Mot de passe utilisateur" 
-                 maxlength="8"  required>
+                <input type="password" name="password" ng-model="password" class="form-control" placeholder="Mot de passe utilisateur" readonly
+                 maxlength="8"  required value = {{$mdp}}> 
                 @if($errors->has('password'))
                 <div class="alert alert-danger">
                     {{ $errors->first('password') }}
                 </div>
                 @endif
             </div>  
-        </div>
-        <div class="form-group">
-            <label class="col-md-3 control-label">Confirmation mot de passe : </label>
-            <div class="col-md-6 col-md-3">
-                <input type="password" name="passwordconf" ng-model="passwordconf" class="form-control" placeholder="Confirmer mot de passe"
-                maxlength="8"  required>
-                @if($errors->has('passwordconf'))
-                <div class="alert alert-danger">
-                    {{ $errors->first('passwordconf') }}
-                </div>
-                @endif
-            </div>  
+            <label class="col-md-3 control-label" style="color:red">*ne peut être modifier</label>
         </div>
         
         <div class="form-group">
@@ -135,7 +125,6 @@
                             <option value="" disabled selected>Choisir un role</option>
                             <option value="Visiteur" selected>Visiteur</option>
                             <option value="Délégué">Délégué</option>
-                            <option value="Responsable">Responsable</option>
                             
                     </select>
             </div>  
@@ -147,7 +136,7 @@
                             <option value="" disabled selected>Choisir un lieu  </option>
 
                             @foreach ($regions as $region)
-                                <option value='{{$region->id}}'>{{$region->id}} </option>
+                                <option selected value='{{$region->id}}'>{{$region->id}} </option>
                             @endforeach
                 
                     </select>
@@ -158,6 +147,7 @@
         <div class="form-group">
             <div class="col-md-6 col-md-offset-3">
                 <button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-log-in"></span> Valider</button>
+                <a href="{{ url('/') }}" class="btn btn-default btn-danger">retour</a>
             </div>
         </div>
   @if (session('erreur'))

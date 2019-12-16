@@ -4,7 +4,7 @@
 <div class="col-md-12 well well-md">
     <h2>Modification de mes informations personnelles</h2>
     <div class="form-horizontal">    
-
+        <i>Vous pouvez modifier vos informations personnelles ici</i><br><br> 
         <div class="form-group">
             <label class="col-md-3 control-label">Adresse : </label>
             <div class="col-md-6 col-md-3">
@@ -64,6 +64,7 @@
         <div class="form-group">
             <div class="col-md-6 col-md-offset-3">
                 <button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-log-in"></span> Valider</button>
+                <a href="{{ url('/') }}" class="btn btn-default btn-danger">retour</a>
             </div>
         </div>
   @if (session('erreur'))
