@@ -346,9 +346,20 @@ public function modifMdp($mdp, $idVisiteur) {
 	* @return le nom de la region sous la forme d'un objet 
 	*/
 	public function getRegionSecteurVisiteurID($id){
-		$req = "select id,reg_nom from region where sec_code = (select aff_sec from vaffectation where idVisiteur = 'a131')";
+		$req = "select id,reg_nom from region where sec_code = (select aff_sec from vaffectation where idVisiteur = :id)";
 		$ligne = DB::select($req, ['id'=>$id]);
 		return $ligne;
+	}
+
+	/**
+	 * Modifie le role et la region du visiteur
+	 * @param $idVisiteur 
+	 * @param $reg
+	 * @param $role
+	 */
+	public function modifInfosParResponsable($id, $reg, $role){
+		$req = "INSERT INTO travailler (idVisiteur,tra_date, tra_reg, tra_role) VALUES (:idVisiteur, date(now()), :reg, :role)";
+		DB::update($req, ['idVisiteur'=>$id, 'reg'=>$reg, 'role'=>$role]);
 	}
 }
 ?>
