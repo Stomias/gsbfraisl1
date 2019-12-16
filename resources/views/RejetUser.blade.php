@@ -5,6 +5,9 @@
     <div class="alert alert-danger">
         L'utilisateur existe déjà! Veuillez réessayer.
     </div>
+    
+    <a href="{{ url('/ajoutUser') }}" class="btn btn-default btn-danger">retour</a>
+        
 </div>
 {!! Form::close() !!}
 @stop
