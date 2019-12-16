@@ -46,7 +46,8 @@
         </div>
         <div class="form-group">
             <div class="col-md-6 col-md-offset-3">
-                <button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-log-in"></span> Valider</button>
+                <a href="{{ url($retour)}}"><button type="button" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-remove"></span> Retour</button></a>
+                <button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-ok"></span> Valider</button>
             </div>
         </div>
   @if (session('erreur'))

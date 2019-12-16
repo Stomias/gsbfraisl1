@@ -14,7 +14,8 @@ class modifUtilisateurController extends Controller
         $gsbFrais = new GsbFrais();
         $detailsVisiteur = $gsbFrais->getInfosVisiteurID($id);
         $regions = $gsbFrais->getRegionSecteurVisiteurID($id);
-        return view('formModifVisiteurDelegue', compact('detailsVisiteur','regions','error'));
+        $retour = "/getListeVisiteurDelegue";
+        return view('formModifVisiteurDelegue', compact('detailsVisiteur','regions','retour','error'));
     }
 
     public function modifInfosUtilisateur(Request $request, $id){

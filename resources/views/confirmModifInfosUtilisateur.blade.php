@@ -5,6 +5,7 @@
     <div class="alert alert-success">
         Les informations ont été mises à jour.
     </div>
+    
 </div>
 {!! Form::close() !!}
 @stop
