@@ -43,7 +43,17 @@ class VoirFraisController extends Controller
       $idVisiteur = Session::get('id');
       $lesFraisForfait = $gsbFrais->getLesFraisForfait($idVisiteur, $mois);
       $lesFraisHorsForfait = $gsbFrais->getLesFraisHorsForfait($idVisiteur, $mois);
+      $fraisForfait = $gsbFrais->getLesIdFrais();
+
       $montantTotal = 0;
+
+
+      $i = 0;
+      foreach ($lesFraisForfait as $ligne) {
+            $montantTotal = $montantTotal + $ligne->quantite * $fraisForfait[$i]->montant;
+            $i = $i + 1;
+      }
+
       foreach ($lesFraisHorsForfait as $fhf){
             $montantTotal = $montantTotal + $fhf->montant;
       }

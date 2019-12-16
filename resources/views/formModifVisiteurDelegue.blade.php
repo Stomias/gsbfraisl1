@@ -1,13 +1,24 @@
 @extends('layouts.master')
 @section('content')
-{!! Form::open(['url' => 'modifVisiteurDelegue']) !!}  
+{!! Form::open(['url' => '/voirDetailVisiteurDelegue/{id}']) !!}  
 <div class="col-md-12 well well-md">
     <h2>Informations personnelles de {{ $detailsVisiteur->nom}} {{ $detailsVisiteur->prenom }} </h2>
     <div class="form-horizontal">    
         <div class="form-group">
+            <label class="col-md-3 control-label">Identifiant : </label>
+            <div class="col-md-6 col-md-3">
+                <input type="text" readonly name="id" ng-model="id" class="form-control" placeholder="Votre identifiant" maxlength="30" value="{{ $detailsVisiteur->id }}" required>
+                @if($errors->has('region'))
+                <div class="alert alert-danger">
+                    {{ $errors->first('region') }}
+                </div>
+                @endif
+            </div>  
+        </div>
+        <div class="form-group">
             <label class="col-md-3 control-label">Région : </label>
             <div class="col-md-6 col-md-3">
-            <select name="role" ng-model="role" class="form-control">
+            <select name="reg" ng-model="reg" class="form-control">
                     @foreach ($regions as $region)
                         <option @if($detailsVisiteur->reg_nom == $region->reg_nom ) selected @endif value="{{ $region->id }}">{{ $region->reg_nom }}</option>
                     @endforeach
@@ -24,7 +35,7 @@
             <div class="col-md-6 col-md-3">
                  <select name="role" ng-model="role" class="form-control">
                     <option @if($detailsVisiteur->tra_role == 'Visiteur') selected @endif  value="Visiteur">Visiteur</option>
-                    <option @if($detailsVisiteur->tra_role == 'Délégué') selected @endif  value="Delegue">Délégué</option>
+                    <option @if($detailsVisiteur->tra_role == 'Délégué') selected @endif  value="Délégué">Délégué</option>
                  </select>
                  @if($errors->has('role'))
                  <div class="alert alert-danger">

@@ -72,8 +72,8 @@ public function modifMdp($mdp, $idVisiteur) {
  * Retourne tous les id de la table FraisForfait
  * @return un objet avec les données de la table frais forfait
 */
-	public function getLesIdFrais(){
-		$req = "select fraisforfait.id as idfrais from fraisforfait order by fraisforfait.id";
+	public function getLesIdFrais() {
+		$req = "select id as idfrais, montant from fraisforfait order by fraisforfait.id";
 		$lesLignes = DB::select($req);
 		return $lesLignes;
 	}
@@ -379,6 +379,17 @@ public function modifMdp($mdp, $idVisiteur) {
 		$req = "select id from visiteur where id = :id";
 		$ligne = DB::select($req, ['id'=>$id]);
 		return $ligne;
+	}
+
+	/**
+	 * Modifie le role et la region du visiteur
+	 * @param $idVisiteur 
+	 * @param $reg
+	 * @param $role
+	 */
+	public function modifInfosParResponsable($id, $reg, $role){
+		$req = "INSERT INTO travailler (idVisiteur,tra_date, tra_reg, tra_role) VALUES (:idVisiteur, date(now()), :reg, :role)";
+		DB::update($req, ['idVisiteur'=>$id, 'reg'=>$reg, 'role'=>$role]);
 	}
 }
 ?>

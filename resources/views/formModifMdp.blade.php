@@ -2,7 +2,7 @@
 @section('content')
 {!! Form::open(['url' => 'changeMdp']) !!}  
 <div class="col-md-12 well well-md">
-    <h2>Modification de mes informations personnelles</h2>
+    <h2>Modification de mon mot de passe</h2>
     <div class="form-horizontal">    
 
         <i>Pour les mots de passe: une majuscule, une minuscule, un chiffre et entre 6 et 8 caractères</i><br><br>
@@ -37,6 +37,7 @@
                     </div>
                     @endif
                 <button type="submit" class="btn btn-default btn-primary"><span class="glyphicon glyphicon-log-in"></span> Valider</button>
+                <a href="{{ url('/') }}" class="btn btn-default btn-danger">retour</a>
             </div>
         </div>
         <div class="form-group">
