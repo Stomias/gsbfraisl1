@@ -72,8 +72,8 @@ public function modifMdp($mdp, $idVisiteur) {
  * Retourne tous les id de la table FraisForfait
  * @return un objet avec les données de la table frais forfait
 */
-	public function getLesIdFrais(){
-		$req = "select fraisforfait.id as idfrais from fraisforfait order by fraisforfait.id";
+	public function getLesIdFrais() {
+		$req = "select id as idfrais, montant from fraisforfait order by fraisforfait.id";
 		$lesLignes = DB::select($req);
 		return $lesLignes;
 	}
