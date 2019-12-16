@@ -70,6 +70,8 @@ Route::get('/getListeVisiteurDelegue', 'voirListeVisiteurDelegueController@getLi
 // ModifDetailsVisiteur
 Route::get('/voirDetailVisiteurDelegue/{id}', 'modifUtilisateurController@voirDetailUtilisateur');
 
+Route::post('/voirDetailVisiteurDelegue/{id}', 'modifUtilisateurController@modifInfosUtilisateur');
+
 //ajoutUser
 Route::get('/ajoutUser', 'ajoutUserController@affFormAjoutUser');
 //ajoutUser
