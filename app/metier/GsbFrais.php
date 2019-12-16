@@ -24,6 +24,13 @@ public function getInfosVisiteur($login, $mdp){
         return $ligne;
 }
 
+
+/**
+ * Modifie le mot de passe de l'utilisateur avec le mot de passe indiqué
+ 
+ * @param $mdp 
+ * @param $idVisiteur
+*/
 public function modifMdp($mdp, $idVisiteur) {
 	$req = "update visiteur set mdp = :mdp 
 		where visiteur.id = :idVisiteur";
@@ -273,21 +280,26 @@ public function modifMdp($mdp, $idVisiteur) {
 		return $ligne[0];
 	}
 
-/**
- * Modifie le CP et la ville du visiteur
- * @param $codePostal
- * @param $ville
- * @param $idVisiteur 
- * @param $adresse
- * @param $email
- * @param $tel
- */
+	/**
+	 * Modifie le CP,la ville, l'adresse, l'email et le téléphone du visiteur
+	 * @param $codePostal
+	 * @param $ville
+	 * @param $idVisiteur 
+	 * @param $adresse
+	 * @param $email
+	 * @param $tel
+	 */
 	public function modifInfos($codePostal, $ville, $idVisiteur, $adresse, $email, $tel){
 		$req = "update visiteur set cp = :codePostal, ville = :ville, adresse = :adresse, email = :email, tel = :tel
 		where id = :idVisiteur";
 		DB::update($req, ['codePostal'=>$codePostal, 'idVisiteur'=>$idVisiteur, 'ville'=>$ville, 'adresse'=>$adresse, 'email'=>$email, 'tel'=>$tel]);
 	}
 
+	/**
+	 * Génére un mot de passe aléatoire de taille $size
+	 * @param $size
+	 * @return le mot passe généré
+	 */
 	function Genere_Password($size)
 	{
 		// Initialisation des caractères utilisables
@@ -322,7 +334,7 @@ public function modifMdp($mdp, $idVisiteur) {
 	}
 
 	/**
-	 * Ajoute un utilisateur dans la base de données
+	 * Ajoute un utilisateur dans la table travailler
 	 * @param $idVisiteur
 	 * @param $role
 	 * @param $reg
@@ -335,11 +347,11 @@ public function modifMdp($mdp, $idVisiteur) {
 
 
 	/**
-	 * Retourne sous forme d'un tableau associatif toutes les lignes de frais au forfait
-	 * concernées par les deux arguments
+	 * Retourne sous forme d'un tableau associatif touts les visiteurs/délégués/responsables
+	 * du même secteur que l'utilisateur $id
 	 
 	* @param $id
-	* @return 
+	* @return les informations des utilisateurs 
 	*/
 	public function getListeVisiteurDelegue($id){
 		$req = "select * from vaffectation inner join visiteur on vaffectation.idVisiteur = visiteur.id where aff_sec = (select aff_sec from vaffectation where idVisiteur= :id)";
@@ -375,6 +387,12 @@ public function modifMdp($mdp, $idVisiteur) {
 		return $ligne;
 	}
 
+	/**
+	 * Retourne l'id de l'utilisateur 
+	 
+	* @param $id
+	* @return l'id de l'utilisateur
+	*/
 	public function UserDispo($id){
 		$req = "select id from visiteur where id = :id";
 		$ligne = DB::select($req, ['id'=>$id]);
